@@ -4,12 +4,26 @@ use instructions::{
     user::{lock_token::*, unlock_token::*},
 };
 
+#[allow(unused_imports)]
+use solana_security_txt::security_txt;
+
 pub mod constants;
 pub mod error;
 pub mod instructions;
 pub mod state;
 
 declare_id!("EP1N2w7ijCboXHJS6mfysTWu2vQohP933ny2cHovSxfU");
+
+#[cfg(not(feature = "no-entrypoint"))]
+security_txt! {
+    name: "Berrie Staking Program",
+    project_url: "https://berr.ie/",
+    contacts: "twitter:BerrieOrg",
+    policy: "https://berrie.gitbook.io/berrie/privacy-policy",
+    preferred_languages: "en",
+    source_code: "https://github.com/BerrieDex/bridge/"
+}
+
 
 #[program]
 pub mod berrie_bridge {
