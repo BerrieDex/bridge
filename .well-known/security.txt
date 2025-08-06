@@ -1,0 +1,4 @@
+Contact: https://www.x.com/BerrieOrg
+Preferred-Languages: en
+Policy: https://berrie.gitbook.io/berrie/privacy-policy
+Source-Code: https://github.com/BerrieDex/bridge
