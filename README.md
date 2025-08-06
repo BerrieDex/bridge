@@ -4,7 +4,6 @@
 ![Build Status](https://img.shields.io/badge/Build-Reproducible-blue?style=for-the-badge)
 ![Security Audit](https://img.shields.io/badge/Security-Audited-orange?style=for-the-badge)
 
-# Berrie Bridging Contract
 
 ## 🔐 Program Verification & Security
 
@@ -130,23 +129,40 @@ You can independently verify this program using the following methods:
 # Install solana-verify
 cargo install solana-verify
 
-# Check verification PDA
-solana-verify get-program-pda \
-  --program-id EP1N2w7ijCboXHJS6mfysTWu2vQohP933ny2cHovSxfU \
-  -u https://api.mainnet-beta.solana.com
-
-# Get program hash
-solana-verify get-program-hash \
-  EP1N2w7ijCboXHJS6mfysTWu2vQohP933ny2cHovSxfU \
-  -u https://api.mainnet-beta.solana.com
-
-# Verify from repository (reproduces the verification)
 solana-verify verify-from-repo \
   -u https://api.mainnet-beta.solana.com \
   --program-id EP1N2w7ijCboXHJS6mfysTWu2vQohP933ny2cHovSxfU \
   --commit-hash 4739293528df270918256efb10ec30c1431b216a \
   --library-name berrie_bridge \
+  --base-image "solanafoundation/solana-verifiable-build:2.1.0" \
   https://github.com/BerrieDex/bridge.git
+
+# Results - August 5th, 2025
+2025-08-06 00:49:34 (117 MB/s) - 'criterion-v2.3.3-linux-x86_64.tar.bz2' saved [677858/677858]
+
++ tar --strip-components 1 -jxf criterion-v2.3.3-linux-x86_64.tar.bz2
++ ./platform-tools/rust/bin/rustc --version
++ ./platform-tools/rust/bin/rustc --print sysroot
++ set +e
++ rustup toolchain uninstall solana
+info: uninstalling toolchain 'solana'
+info: toolchain 'solana' uninstalled
++ set -e
++ rustup toolchain link solana platform-tools/rust
++ exit 0
+Finished building program
+Program Solana version: v2.3.0
+02cc4964f692c3466b46dfb8328814c330342066fba280158a7dc402f3d279e8
+Executable file found at path: "/tmp/solana-verify/c691e0ba-b21f-413a-95a1-4c544a79a8b5/bridge.git//target/deploy/berrie_bridge.so"
+Fetching on-chain program data for program ID: EP1N2w7ijCboXHJS6mfysTWu2vQohP933ny2cHovSxfU
+Executable Program Hash from repo: 02cc4964f692c3466b46dfb8328814c330342066fba280158a7dc402f3d279e8
+On-chain Program Hash: 02cc4964f692c3466b46dfb8328814c330342066fba280158a7dc402f3d279e8
+Program hash matches ✅
+Do you want to upload the program verification to the Solana Blockchain? (y/n) y
+Uploading the program verification params to the Solana blockchain...
+Using connection url: https://api.mainnet-beta.solana.com
+Program uploaded successfully. Transaction ID: 3QyEWBRaRo8rBaWPbgWhTFYApqJ4YbmfvvD6YUVVWE1sWqKhQ84DnCy7AYoPdnPKTzmWoiqmrZsyk3Snyps6jNAc
+
 ```
 
 ### Method 2: Manual Build Verification
